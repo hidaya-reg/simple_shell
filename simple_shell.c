@@ -15,7 +15,7 @@ int main(void)
 	
 	while (1)
 	{
-		write(1, "$cisfun$ ", 9);
+		write(1, "#cisfun$ ", 9);
 		/* Read user input*/
 		if (fgets(input, BUFSIZE, stdin) == NULL)
 		{
@@ -24,7 +24,8 @@ int main(void)
 		}
 
 		/* Remove newline character from input*/
-		input[strcspn(input, "\n")] = '\0';
+		/* no need to remove newline since its part of DELIMITER */
+		/*input[strcspn(input, "\n")] = '\0';*/
 
 		/* Tokenize input into arguments*/
 		token = strtok(input, DELIMITER);
