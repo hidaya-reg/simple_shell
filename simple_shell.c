@@ -60,7 +60,7 @@ int main(void)
 		{
 			perror("Error in fork");
 			free(input);
-			return (1);
+			exit(EXIT_FAILURE);
 		}
 		if (child_pid == 0)
 		{
@@ -68,6 +68,8 @@ int main(void)
 			if (execve(args[0], args, NULL) == -1)
 			{
 				perror("Error in execve");
+				free(input);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
@@ -76,5 +78,6 @@ int main(void)
 			wait(&status);
 		}
 	}
+	free(input);
 	return (0);
 }
