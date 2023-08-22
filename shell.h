@@ -14,4 +14,6 @@
 
 #define BUFSIZE 1024
 #define DELIMITER " \t\r\n\a"
+
+void execmd(char **argv);
 #endif

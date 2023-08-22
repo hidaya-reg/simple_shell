@@ -7,43 +7,59 @@
  */
 int main(void)
 {
-	char input[BUFSIZE];
+	size_t input_size = 0, n_char;
+	char *input = NULL, *token;
 	char *args[BUFSIZE / 2 + 1];
 	pid_t child_pid;
-	int status, num_args;
-	char *token;
+	int status, num_args, i;
 	
 	while (1)
 	{
-		write(1, "#cisfun$ ", 9);
-		/* Read user input*/
-		if (fgets(input, BUFSIZE, stdin) == NULL)
-		{
-			printf("\n");
-			break;
-		}
+		if (isatty(STDIN_FILENO))
+			write(1, "#cisfun$ ", 9);
 
-		/* Remove newline character from input*/
-		/* no need to remove newline since its part of DELIMITER */
-		/*input[strcspn(input, "\n")] = '\0';*/
+		/* Read user input*/
+		n_char = getline(&input, &input_size, stdin);
+		if (n_char == -1)
+		{
+			perror("Error in getline");
+			free(input);
+			exit(EXIT_FAILURE);
+		}
+		/*if (n_char == 1)
+		{
+			continue;
+		}*/
+
+		i = 0;
+		while (input[i])
+		{
+		       if (input[i] == '\n')
+			       input[n_char - 1] = 0;
+		       i++;
+		}
+		/*args = malloc(sizeof(char *) * BUFSIZE / 2 + 1);*/
 
 		/* Tokenize input into arguments*/
-		token = strtok(input, DELIMITER);
+		token = strtok(input, " ");
 
+		/* Get number of tokens*/
 		num_args = 0;
 		while (token)
 		{
 			args[num_args] = token;
 			num_args++;
-			token = strtok(NULL, DELIMITER);
+			token = strtok(NULL, " ");
 		}
 		args[num_args] = NULL;
-		
+
+
 		child_pid = fork();
 
 		if (child_pid == -1)
 		{
-			perror("Error:");
+			perror("Error in fork");
+			free(input);
 			return (1);
 		}
 		if (child_pid == 0)
@@ -51,8 +67,7 @@ int main(void)
 			/* Child process*/
 			if (execve(args[0], args, NULL) == -1)
 			{
-				perror("Error in execve:");
-				return (1);
+				perror("Error in execve");
 			}
 		}
 		else
@@ -61,6 +76,5 @@ int main(void)
 			wait(&status);
 		}
 	}
-
 	return (0);
 }
