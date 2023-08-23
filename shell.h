@@ -16,7 +16,11 @@
 #define BUFSIZE 1024
 #define DELIMITER " \t\r\n\a"
 
-void execute_cmd(char *input, char **env, char *path);
+/* excution functions */
+bool execute_full_path(char **args);
+bool execute_path(char**args, char *path);
+void execute_cmd(char *input, char *path, bool is_interactive);
+
 void file_stat(char *pathfile, struct stat *stat_input);
 void tokenize(char *input, char **av);
 bool find_cmd(char *cmd, char *path, char *result);
@@ -30,6 +34,7 @@ char *_strchr(const char *str, int ch);
 char *_strrchr(const char *str, int ch);
 size_t _strspn(const char *str, const char *accept);
 size_t _strcspn(const char *str, const char *reject);
+char *_strdup(const char *str);
 
 /* environment functions */
 extern char **environ;
