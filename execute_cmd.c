@@ -4,7 +4,7 @@
  * execute_cmd - execute command
  * @input: input command
  * @path: path
- * is_interactive: is via interactive mode or not
+ * @is_interactive: is via interactive mode or not
  * Return: void
  */
 

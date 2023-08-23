@@ -21,6 +21,7 @@ bool execute_full_path(char **args);
 bool execute_path(char**args, char *path);
 void execute_cmd(char *input, char *path, bool is_interactive);
 
+void handle_env(void);
 void file_stat(char *pathfile, struct stat *stat_input);
 void tokenize(char *input, char **av);
 bool find_cmd(char *cmd, char *path, char *result);

@@ -7,13 +7,8 @@ int main(void)
 {
 	int n_char;
 	bool is_interactive = isatty(STDIN_FILENO);
-	char *path = getenv("PATH");
+	char *path = get_path("PATH");
 
-	if (path == NULL)
-	{
-		perror("Eror: PATH environment variable not set");
-		exit(EXIT_FAILURE);
-	}
 	while (1)
 	{
 		char *input = NULL;
@@ -25,9 +20,7 @@ int main(void)
 		if (n_char == -1)
 		{
 			if (is_interactive)
-			{
 				perror("Error in getline");
-			}
 			free(input);
 			exit(0);
 		}
@@ -44,16 +37,7 @@ int main(void)
 		}
 		if (_strcmp(input, "env") == 0)
 		{
-			char **env = environ;
-			
-			while (*env)
-			{
-
-				write(STDOUT_FILENO, *env, _strlen(*env));
-				write(STDOUT_FILENO, *env, strlen(*env));
-				write(STDOUT_FILENO, "\n", 1);
-				env++;
-			}
+			handle_env();
 			continue;
 		}
 		execute_cmd(input, path, is_interactive);
