@@ -2,23 +2,21 @@
 
 /**
  * main - Entry point of the program
- *
  * Return: Always 0 (Success)
  */
-int main(void)
+int main(int ac, char *av[], char **env)
 {
 	size_t input_size = 0, n_char;
-	char *input = NULL, *token;
-	char *args[BUFSIZE / 2 + 1];
-	pid_t child_pid;
-	int status, num_args, i;
+	char *input = NULL;
+	bool from_pipe = false;
 	
-	while (1)
+	while (1 && !from_pipe)
 	{
-		if (isatty(STDIN_FILENO))
-			write(1, "#cisfun$ ", 9);
+		if (isatty(STDIN_FILENO) == 0)
+			from_pipe = true;
 
-		/* Read user input*/
+		write(1, "#cisfun$ ", 9);
+
 		n_char = getline(&input, &input_size, stdin);
 		if (n_char == -1)
 		{
@@ -26,57 +24,17 @@ int main(void)
 			free(input);
 			exit(EXIT_FAILURE);
 		}
-		/*if (n_char == 1)
+
+		if (n_char > 0 && input[n_char - 1] == '\n')
+			input[n_char - 1] = '\0';
+
+		if (strcmp(input, "exit") == 0)
 		{
-			continue;
-		}*/
-
-		i = 0;
-		while (input[i])
-		{
-		       if (input[i] == '\n')
-			       input[n_char - 1] = 0;
-		       i++;
-		}
-		/*args = malloc(sizeof(char *) * BUFSIZE / 2 + 1);*/
-
-		/* Tokenize input into arguments*/
-		token = strtok(input, " ");
-
-		/* Get number of tokens*/
-		num_args = 0;
-		while (token)
-		{
-			args[num_args] = token;
-			num_args++;
-			token = strtok(NULL, " ");
-		}
-		args[num_args] = NULL;
-
-
-		child_pid = fork();
-
-		if (child_pid == -1)
-		{
-			perror("Error in fork");
 			free(input);
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
-		if (child_pid == 0)
-		{
-			/* Child process*/
-			if (execve(args[0], args, NULL) == -1)
-			{
-				perror("Error in execve");
-				free(input);
-				exit(EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			/* Parent process*/
-			wait(&status);
-		}
+
+		execute_cmd(input, env);
 	}
 	free(input);
 	return (0);
