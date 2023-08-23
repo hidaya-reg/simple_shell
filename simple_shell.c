@@ -2,6 +2,9 @@
 
 /**
  * main - Entry point of the program
+ * @ac: argument count
+ * @av: argument vector
+ * @env: environment
  * Return: Always 0 (Success)
  */
 int main(int ac, char *av[], char **env)
@@ -9,7 +12,7 @@ int main(int ac, char *av[], char **env)
 	size_t input_size = 0, n_char;
 	char *input = NULL;
 	bool from_pipe = false;
-	
+
 	while (1 && !from_pipe)
 	{
 		if (isatty(STDIN_FILENO) == 0)

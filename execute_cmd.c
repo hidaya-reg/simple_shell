@@ -3,7 +3,6 @@
 /*
  * execute_cmd - execute command
  * @input: argument vector
- * @stat_input: stat of input comand
  * @env: environement
  * Return: void
  */
