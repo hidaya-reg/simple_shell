@@ -8,44 +8,25 @@
 
 char *_strtok(char *str, const char *delim)
 {
-	char *current = NULL;
-	char *start = NULL;
+	static char *last = NULL;
+	char *start, *end;
 
 	if (str != NULL)
-		current = str;
-	else if (current == NULL)
+		last = str;
+	else if (last == NULL)
 		return (NULL);
-	while (*current)
+
+	start = last;
+	end = start;
+	while (*end != '\0' && _strchr(delim, *end) == NULL)
+		end++;
+
+	if (*end == '\0')
+		last = NULL;
+	else
 	{
-		bool is_delim = false;
-
-		for (const char *d = delim; *d; d++)
-		{
-			if (*current == *d)
-			{
-				is_delim = true, break;
-			}
-		}
-		if (is_delim)
-		{
-			*current = '\0';
-			if (start != NULL)
-			{
-				char *token = start;
-
-				start = NULL;
-				current++;
-				return (token);
-			}
-			else
-				current++;
-		}
-		else
-		{
-			if (start == NULL)
-				start = current;
-			current++;
-		}
+		*end = '\0';
+		last = end + 1;
 	}
 	return (start);
 }

@@ -10,11 +10,9 @@
 
 bool find_cmd(char *cmd, char *path, char *result)
 {
-	char *token;
+	char *token = _strtok(path, ":");
 
-	token = _strtok(path, ":");
-
-	while (token)
+	while (token != NULL)
 	{
 		_strcpy(result, token);
 		_strcat(result, "/");

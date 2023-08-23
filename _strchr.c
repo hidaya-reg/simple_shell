@@ -10,11 +10,16 @@
 
 char *_strchr(const char *str, int ch)
 {
-	while (*str)
+	char *r = NULL;
+
+	while (*str != '\0')
 	{
 		if (*str == ch)
-			return ((char *)str);
+		{
+			r = ((char *)str);
+			break;
+		}
 		str++;
 	}
-	return (NULL);
+	return (r);
 }

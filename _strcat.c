@@ -12,16 +12,11 @@ char *_strcat(char *dest, const char *src)
 {
 	char *org_dest = dest;
 
-	while (*dest)
+	while (*dest != '\0')
 		dest++;
 
-	while (*src)
+	while ((*dest++ = *src++) != '\0')
 	{
-		*dest = *src;
-		dest++;
-		src++;
 	}
-	*dest = '\0';
-
 	return (org_dest);
 }

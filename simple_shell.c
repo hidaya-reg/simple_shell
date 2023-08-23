@@ -7,7 +7,8 @@
 
 int main(void)
 {
-	size_t input_size = 0, n_char;
+	size_t input_size = 0;
+	int n_char;
 	char *input = NULL;
 	char *path = get_path();
 

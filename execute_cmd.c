@@ -24,7 +24,10 @@ void execute_cmd(char *input, char **env, char *path)
 		else
 			cmd_name = args[0];
 		if (!find_cmd(cmd_name, path, cmd_path))
-			perror("Error command  not ofound"), return;
+		{
+			perror("Error command  not ofound");
+			return;
+		}
 	}
 	else
 		_strcpy(cmd_path, args[0]);

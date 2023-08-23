@@ -2,7 +2,7 @@
 #define SHELL_H
 
 #include <stdio.h>
-#include <stdio.h>
+#include <stddef.h>
 #include <unistd.h>
 #include <dirent.h>
 #include <sys/types.h>
@@ -28,6 +28,8 @@ int _strcmp(const char *str1, const char *str2);
 char *_strcat(char *dest, const char *src);
 char *_strchr(const char *str, int ch);
 char *_strrchr(const char *str, int ch);
+size_t _strspn(const char *str, const char *accept);
+size_t _strcspn(const char *str, const char *reject);
 
 /* environment functions */
 extern char **environ;
