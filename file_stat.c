@@ -1,8 +1,8 @@
 #include "shell.h"
 
-/*
+/**
  * file_stat - check file status
- * @pathfile: path of file
+ * @cmd: command
  * @stat_input: stat of input string
  * Return: void
  */
