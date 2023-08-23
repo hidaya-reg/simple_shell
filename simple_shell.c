@@ -34,6 +34,17 @@ int main(void)
 			free(input);
 			exit(0);
 		}
+		if (_strcmp(input, "env") == 0)
+		{
+			char **env = environ;
+			while (*env)
+			{
+				write(1, *env, _strlen(*env));
+				write(1, "\n", 1);
+				env++;
+			}
+			continue;
+		}
 
 		execute_cmd(input, environ, path);
 	}

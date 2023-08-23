@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdbool.h>
-
+#include <string.h>
 #define BUFSIZE 1024
 #define DELIMITER " \t\r\n\a"
 
