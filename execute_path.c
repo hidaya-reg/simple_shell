@@ -22,7 +22,7 @@ bool execute_path(char **args, char *path)
 			args[0] = cmd_path;
 			return (execute_full_path(args));
 		}
-		token = _strtok(NULL, ":");
+		token = _strtok(NULL, " ");
 	}
 	return (false);
 }

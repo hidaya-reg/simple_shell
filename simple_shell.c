@@ -3,13 +3,12 @@
  * main - Entry point
  * Return: 0 on success
  */
-
 int main(void)
 {
 	int n_char;
-	char *path = getenv("PATH");
 	bool is_interactive = isatty(STDIN_FILENO);
-	
+	char *path = getenv("PATH");
+
 	if (path == NULL)
 	{
 		perror("Eror: PATH environment variable not set");
@@ -19,6 +18,7 @@ int main(void)
 	{
 		char *input = NULL;
 		size_t input_size = 0;
+
 		if (is_interactive)
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
 		n_char = getline(&input, &input_size, stdin);
@@ -29,14 +29,15 @@ int main(void)
 				perror("Error in getline");
 			}
 			free(input);
-			continue;
+			exit(0);
 		}
 		if (n_char == 1)
 		{
-			break;
+			continue;
 		}
 		input[_strcspn(input, "\n")] = '\0';
-		if (_strcmp(input, "exit") == 0)
+
+		if (strcmp(input, "exit") == 0)
 		{
 			free(input);
 			exit(0);
@@ -47,11 +48,12 @@ int main(void)
 			
 			while (*env)
 			{
+
 				write(STDOUT_FILENO, *env, _strlen(*env));
+				write(STDOUT_FILENO, *env, strlen(*env));
 				write(STDOUT_FILENO, "\n", 1);
 				env++;
 			}
-			free(input);
 			continue;
 		}
 		execute_cmd(input, path, is_interactive);
