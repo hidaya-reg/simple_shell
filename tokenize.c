@@ -12,11 +12,11 @@ void tokenize(char *input, char **av)
 	char *token;
 	int num_args = 0;
 
-	token = _strtok(input, DELIMITER);
+	token = _strtok(input, " ");
 	while (token != NULL)
 	{
 		av[num_args++] = token;
-		token = _strtok(NULL, DELIMITER);
+		token = _strtok(NULL, " ");
 	}
 	av[num_args] = NULL;
 }
