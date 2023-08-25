@@ -46,6 +46,7 @@ int is_empty(char *line);
 /* environment functions */
 extern char **environ;
 char *get_path();
+void rm_env(char *var_env);
 
 char *_getline();
 

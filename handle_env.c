@@ -5,14 +5,18 @@
  * Return: void
  */
 
-void handle_env(void)
+void handle_env()
 {
 	char **env = environ;
+	size_t i;
 
-	while (*env)
+	if (!env)
+		return;
+
+	for (i = 0; environ[i] != NULL; i++)
 	{
-		write(1, *env, _strlen(*env));
+		write(1, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
-		env++;
 	}
+
 }

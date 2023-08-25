@@ -7,7 +7,7 @@ char *_getline()
 {
 	int bytes_read, i, buffer_size = BUFSIZE;
 	char current_char = 0;
-	char *line_buffer;
+	char *line_buffer, *buffer;
 
 	line_buffer = malloc(sizeof(char) * buffer_size);
 	if (line_buffer == NULL)
@@ -44,5 +44,12 @@ char *_getline()
 		}
 	}
 	line_buffer[i] = '\0';
-	return (line_buffer);
+	if (is_empty(line_buffer))
+	{
+		free(line_buffer);
+		return ("\0");
+	}
+	buffer = rm_space(line_buffer);
+	free(line_buffer);
+	return (buffer);
 }
