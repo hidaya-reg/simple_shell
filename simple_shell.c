@@ -16,7 +16,6 @@ int main(void)
 		input = _getline();
 		if (_strlen(input) == 1)
 		{
-			stat = 0;
 			continue;
 		}
 
