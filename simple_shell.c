@@ -7,7 +7,7 @@ int main(void)
 {
 	bool is_interactive = isatty(STDIN_FILENO);
 	char **args, *input;
-	int stat = 0;
+	int stat = 1;
 
 	while (1)
 	{
@@ -27,7 +27,7 @@ int main(void)
 		{
 			free(input);
 			free(args);
-			exit(stat);
+			exit(EXIT_SUCCESS);
 		}
 		else if (_strcmp(args[0], "env") == 0)
 		{
