@@ -8,28 +8,25 @@
 
 char *rm_space(char *input)
 {
-	int i, j;
-	char *buffer;
+	unsigned int i, j = 0;
+	char *buffer = malloc(sizeof(char) * _strlen(input) + 1);
 
-	for (i = 0; input[i] == ' '; i++)
-		;
-	buffer = malloc(sizeof(char) * _strlen(input) - i + 1);
 	if (buffer == NULL)
 	{
 		free(buffer);
 		return (NULL);
 	}
 
-	for (; input[i + 1] != '\0'; i++)
+	for (i = 0; i < _strlen(input); i++)
 	{
-		buffer[j] = input[i];
-		j++;
+		if (input[i] != ' ')
+		{
+			buffer[j] = input[i];
+			j++;
+		}
 	}
+
 	buffer[j] = '\0';
-	if (buffer[0] == '\0')
-	{
-		free(buffer);
-		return ("\0");
-	}
+
 	return (buffer);
 }

@@ -3,12 +3,11 @@
  * _getline - read line from input
  * Return: buffer
  */
-
 char *_getline()
 {
 	int bytes_read, i, buffer_size = BUFSIZE;
 	char current_char = 0;
-	char *line_buffer;
+	char *line_buffer, *buffer;
 
 	line_buffer = malloc(sizeof(char) * buffer_size);
 	if (line_buffer == NULL)
@@ -28,8 +27,8 @@ char *_getline()
 		line_buffer[i] = current_char;
 		if (line_buffer[0] == '\n')
 		{
-			free(line_buffer);
-			return ("\0");
+			line_buffer[0] = '\0';
+			return (line_buffer);
 		}
 		if (i >= buffer_size)
 		{
@@ -43,6 +42,7 @@ char *_getline()
 		}
 	}
 	line_buffer[i] = '\0';
-
-	return (line_buffer);
+	buffer = rm_space(line_buffer);
+	free(line_buffer);
+	return (buffer);
 }
