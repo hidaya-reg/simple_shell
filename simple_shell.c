@@ -18,6 +18,8 @@ int main(void)
 		input = _getline();
 		if (input[0] == '\0' || is_empty(input) == 1)
 		{
+			if (!is_interactive)
+				free(input);
 			continue;
 		}
 
