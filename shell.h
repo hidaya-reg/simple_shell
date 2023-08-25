@@ -17,12 +17,13 @@
 #define DELIMITER " \t\r\n\a"
 
 /* excution functions */
-int check_execute_cmd(char **args, char *input);
+int check_execute_cmd(char **args);
 char *build_cmd_path(char *str1, char *str2);
 int find_cmd_path(char **args);
 int execute_cmd(char **args);
+void handle_exit(char **args);
 
-void handle_env(void);
+void handle_env(char **args);
 void file_stat(char *pathfile, struct stat *stat_input);
 char **tokenize(char *input);
 
@@ -42,6 +43,7 @@ bool is_delim(const char *str, char ch);
 char *rm_space(char *input);
 /*void rm_space(char **input);*/
 int is_empty(char *line);
+int _atoi(char *str);
 
 /* environment functions */
 extern char **environ;

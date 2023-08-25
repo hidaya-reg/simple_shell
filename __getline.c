@@ -34,8 +34,7 @@ char *_getline()
 		}
 		if (i >= buffer_size)
 		{
-			buffer_size += 2;
-			line_buffer = realloc(line_buffer, sizeof(char) * buffer_size);
+			line_buffer = realloc(line_buffer, sizeof(char) * (buffer_size + 2));
 			if (line_buffer == NULL)
 			{
 				free(line_buffer);

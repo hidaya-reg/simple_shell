@@ -25,23 +25,22 @@ int main(void)
 
 		if (_strcmp(args[0], "exit") == 0)
 		{
+			handle_exit(args);
 			free(input);
 			free(args);
-			exit(EXIT_SUCCESS);
 		}
 		else if (_strcmp(args[0], "env") == 0)
 		{
-			handle_env();
+			handle_env(args);
+			free(input);
 			free(args);
-			stat = 0;
 			continue;
 		}
 		else
-			stat = check_execute_cmd(args, input);
+			stat = check_execute_cmd(args);
 
 		free(input);
 		free(args);
-		wait(&stat);
 	}
 	return (stat);
 }
