@@ -11,7 +11,7 @@ void handle_env(void)
 
 	while (*env)
 	{
-		write(STDOUT_FILENO, *env, strlen(*env));
+		write(1, *env, _strlen(*env));
 		write(STDOUT_FILENO, "\n", 1);
 		env++;
 	}

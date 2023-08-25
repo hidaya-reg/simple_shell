@@ -21,7 +21,7 @@ char *_strtok(char *str, const char *delim)
 		if (is_delim(delim, next_token[i]) == 0)
 			break;
 	}
-	if (cursor[i] == '\0' || cursor[i] == '#')
+	if (cursor[i] == '\0')
 	{
 		cursor = NULL;
 		return (NULL);

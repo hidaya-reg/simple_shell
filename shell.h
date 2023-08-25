@@ -39,7 +39,7 @@ size_t _strcspn(const char *str, const char *reject);
 char *_strdup(const char *str);
 int _strncmp(const char *str1, const char *str2, size_t n);
 bool is_delim(const char *str, char ch);
-
+char *rm_space(char *input);
 
 /* environment functions */
 extern char **environ;

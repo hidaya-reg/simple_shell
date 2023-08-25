@@ -13,9 +13,7 @@ int check_execute_cmd(char **args, char *input)
 
 	if (*args == NULL)
 		return (EXIT_FAILURE);
-
 	child_pid = fork();
-
 	if (child_pid == -1)
 	{
 		perror("Error");
@@ -23,7 +21,7 @@ int check_execute_cmd(char **args, char *input)
 	}
 	if (child_pid == 0)
 	{
-		if (_strncmp(*args, "/", 1) != 0)	
+		if (_strncmp(*args, "/", 1) != 0)
 		{
 			if (find_cmd_path(args) != 0)
 			{
@@ -45,11 +43,8 @@ int check_execute_cmd(char **args, char *input)
 		else
 			return (0);
 	}
-	else
-	{
-		wait(&status);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-	}
+	wait(&status);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
 	return (127);
 }
