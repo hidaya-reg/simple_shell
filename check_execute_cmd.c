@@ -31,7 +31,6 @@ int check_execute_cmd(char **args, char *input)
 				exit(127);
 			}
 		}
-		printf("after full cmd path %s \n",args[0]);
 		if (access(*args, R_OK) != 0)
 		{
 			perror("Error");

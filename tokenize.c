@@ -27,12 +27,12 @@ char **tokenize(char *input)
 		return (NULL);
 	}
 
-	token = strtok(input, "\n\t\r\a ");
+	token = _strtok(input, DELIMITER);
 
 	while (token != NULL)
 	{
 		av[num_args] = token;
-		token = strtok(NULL, "\n\t\r\a ");
+		token = _strtok(NULL, DELIMITER);
 		num_args++;
 	}
 	av[num_args] = NULL;

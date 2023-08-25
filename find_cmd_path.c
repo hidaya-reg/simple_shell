@@ -9,7 +9,7 @@
 int find_cmd_path(char **args)
 {
 	char *path = getenv("PATH");
-	char *token = strtok(path, ":");
+	char *token = _strtok(path, ":");
 	struct stat buf;
 	char *cmd_path;
 
@@ -23,7 +23,7 @@ int find_cmd_path(char **args)
 			return (0);
 		}
 		free(cmd_path);
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(path);
 	free(token);
