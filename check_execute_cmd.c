@@ -19,7 +19,7 @@ int check_execute_cmd(char **args, char *input)
 	}
 	if (child_pid == 0)
 	{
-		if (_strncmp(*args, "/", 1) != 0)
+		if (_strncmp(*args, "/", 1) != 0 && _strncmp(*args, "./", 2) != 0)
 		{
 			if (find_cmd_path(args) != 0)
 			{
