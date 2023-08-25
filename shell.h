@@ -45,6 +45,6 @@ char *rm_space(char *input);
 extern char **environ;
 char *get_path();
 
-char * _getline();
+char *_getline();
 
 #endif
