@@ -5,43 +5,40 @@
  */
 int main(void)
 {
-	int n_char;
 	bool is_interactive = isatty(STDIN_FILENO);
-	char *path = get_path("PATH");
+	char **args, *input;
+	int stat = 0;
 
 	while (1)
 	{
-		char *input = NULL;
-		size_t input_size = 0;
-
 		if (is_interactive)
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
-		n_char = getline(&input, &input_size, stdin);
-		if (n_char == -1)
-		{
-			if (is_interactive)
-				perror("Error in getline");
-			free(input);
-			exit(0);
-		}
-		if (n_char == 1)
-		{
-			continue;
-		}
-		input[_strcspn(input, "\n")] = '\0';
+		input = _getline();
 
-		if (strcmp(input, "exit") == 0)
+		if (input[0] == '\0')
+			continue;
+
+		args = tokenize(input);
+
+
+		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(input);
-			exit(0);
+			free(args);
+			exit(stat);
 		}
-		if (_strcmp(input, "env") == 0)
+		else if (_strcmp(args[0], "env") == 0)
 		{
 			handle_env();
+			free(args);
 			continue;
 		}
-		execute_cmd(input, path, is_interactive);
+		else
+			stat = check_execute_cmd(args, input);
+
 		free(input);
+		free(args);
+		wait(&stat);
 	}
-	return (0);
+	return (stat);
 }

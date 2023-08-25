@@ -17,14 +17,15 @@
 #define DELIMITER " \t\r\n\a"
 
 /* excution functions */
-bool execute_full_path(char **args);
-bool execute_path(char**args, char *path);
-void execute_cmd(char *input, char *path, bool is_interactive);
+int check_execute_cmd(char **args, char *input);
+char *build_cmd_path(char *str1, char *str2);
+int find_cmd_path(char **args);
+int execute_cmd(char **args);
 
 void handle_env(void);
 void file_stat(char *pathfile, struct stat *stat_input);
-void tokenize(char *input, char **av);
-bool find_cmd(char *cmd, char *path, char *result);
+char **tokenize(char *input);
+
 /* string functions*/
 size_t _strlen(const char *str);
 char *_strtok(char *str, const char *delim);
@@ -36,8 +37,14 @@ char *_strrchr(const char *str, int ch);
 size_t _strspn(const char *str, const char *accept);
 size_t _strcspn(const char *str, const char *reject);
 char *_strdup(const char *str);
+int _strncmp(const char *str1, const char *str2, size_t n);
+bool is_delim(const char *str, char ch);
+
 
 /* environment functions */
 extern char **environ;
 char *get_path();
+
+char * _getline();
+
 #endif
