@@ -20,7 +20,6 @@ int main(void)
 
 		args = tokenize(input);
 
-
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(input);
@@ -31,6 +30,7 @@ int main(void)
 		{
 			handle_env();
 			free(args);
+			stat = 0;
 			continue;
 		}
 		else
