@@ -11,8 +11,6 @@ int check_execute_cmd(char **args, char *input)
 	int status;
 	pid_t child_pid;
 
-	if (*args == NULL)
-		return (EXIT_FAILURE);
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -43,8 +41,11 @@ int check_execute_cmd(char **args, char *input)
 		else
 			return (0);
 	}
-	wait(&status);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
+	else
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+	}
 	return (127);
 }

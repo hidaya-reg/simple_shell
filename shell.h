@@ -41,6 +41,7 @@ int _strncmp(const char *str1, const char *str2, size_t n);
 bool is_delim(const char *str, char ch);
 char *rm_space(char *input);
 /*void rm_space(char **input);*/
+int is_empty(char *line);
 
 /* environment functions */
 extern char **environ;

@@ -13,14 +13,16 @@ int main(void)
 	{
 		if (is_interactive)
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
+		else
+			stat = 0;
 		input = _getline();
-		if (_strlen(input) == 1)
+		if (input[0] == '\0' || is_empty(input) == 1)
 		{
 			continue;
 		}
 
 		args = tokenize(input);
-		printf("test args[0]:%slll \n", args[0]);
+
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(input);
