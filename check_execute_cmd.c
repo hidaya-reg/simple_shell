@@ -2,7 +2,6 @@
 /**
  * check_execute_cmd - check and execute a command
  * @args: argumeny vector
- * @input: input string typed by user
  * Return: command satatus
  */
 int check_execute_cmd(char **args)
@@ -10,14 +9,8 @@ int check_execute_cmd(char **args)
 	int status = 0;
 	pid_t child_pid;
 
-	/*if (_strncmp(*args, "/", 1) != 0 && _strncmp(*args, "./", 2) != 0)
-	{
-		if (find_cmd_path(args) != 0)
-		{
-			perror("File not found");
-			exit(127);
-		}
-	}*/
+	if (*args == NULL)
+		return (EXIT_FAILURE);
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -29,10 +22,10 @@ int check_execute_cmd(char **args)
 		if (_strncmp(*args, "/", 1) != 0 && _strncmp(*args, "./", 2) != 0)
 		{
 			if (find_cmd_path(args) != 0)
-                	{
-                        	perror("File not found");
-                       		exit(127);
-        	        }
+			{
+				perror("File not found");
+				exit(127);
+			}
 		}
 		if (execve(args[0], args, environ) == -1)
 		{

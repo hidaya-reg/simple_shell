@@ -5,34 +5,22 @@
  */
 int main(void)
 {
-	bool is_interactive = isatty(STDIN_FILENO);
 	char **args, *input;
 	int stat = 1;
 
 	while (1)
 	{
-		if (is_interactive)
+		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
 		else
 			stat = 0;
 		input = _getline();
 		if (input[0] == '\0' || is_empty(input) == 1)
-		{
-			stat = 0;
 			continue;
-		}
-
 		args = tokenize(input);
-
-		if (!args || !args[0])
-		{
-			free(input);
-			continue;
-		}
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(input);
-			free(args);
 			exit(0);
 		}
 		else if (_strcmp(args[0], "env") == 0)
@@ -44,7 +32,6 @@ int main(void)
 		}
 		else
 			stat = check_execute_cmd(args);
-
 		free(input);
 		free(args);
 	}

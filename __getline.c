@@ -7,15 +7,13 @@ char *_getline()
 {
 	int bytes_read, i, buffer_size = BUFSIZE;
 	char current_char = 0;
-	char *line_buffer, *buffer;
+	char *buffer, *line_buffer = malloc(sizeof(char) * buffer_size);
 
-	line_buffer = malloc(sizeof(char) * buffer_size);
 	if (line_buffer == NULL)
 	{
 		free(line_buffer);
 		return (NULL);
 	}
-
 	for (i = 0; current_char != EOF && current_char != '\n'; i++)
 	{
 		fflush(stdin);
@@ -26,8 +24,7 @@ char *_getline()
 			exit(EXIT_SUCCESS);
 		}
 		line_buffer[i] = current_char;
-
-		if (line_buffer[0] == '\n')
+		if (line_buffer[0] == '\n' || is_empty(line_buffer))
 		{
 			free(line_buffer);
 			return ("\0");
@@ -43,11 +40,6 @@ char *_getline()
 		}
 	}
 	line_buffer[i] = '\0';
-	if (is_empty(line_buffer))
-	{
-		free(line_buffer);
-		return ("\0");
-	}
 	buffer = rm_space(line_buffer);
 	free(line_buffer);
 	return (buffer);
