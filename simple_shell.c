@@ -12,14 +12,13 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
-		else
-			stat = 0;
 		input = _getline();
 		if (input[0] == '\0' || is_empty(input) == 1)
 			continue;
 		args = tokenize(input);
 		if (_strcmp(args[0], "exit") == 0)
 		{
+			free(args);
 			free(input);
 			exit(0);
 		}

@@ -52,5 +52,5 @@ char *get_path();
 void rm_env(char *var_env);
 
 char *_getline();
-
+char *free_line(char *str);
 #endif

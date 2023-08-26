@@ -6,8 +6,8 @@
 char *_getline()
 {
 	int bytes_read, i, buffer_size = BUFSIZE;
-	char current_char = 0;
 	char *buffer, *line_buffer = malloc(sizeof(char) * buffer_size);
+	char current_char = 0;
 
 	if (line_buffer == NULL)
 	{
@@ -24,11 +24,8 @@ char *_getline()
 			exit(EXIT_SUCCESS);
 		}
 		line_buffer[i] = current_char;
-		if (line_buffer[0] == '\n' || is_empty(line_buffer))
-		{
-			free(line_buffer);
-			return ("\0");
-		}
+		if (line_buffer[0] == '\n')
+			free_line(line_buffer);
 		if (i >= buffer_size)
 		{
 			line_buffer = realloc(line_buffer, sizeof(char) * (buffer_size + 2));
@@ -40,6 +37,8 @@ char *_getline()
 		}
 	}
 	line_buffer[i] = '\0';
+	if (is_empty(line_buffer))
+		free_line(line_buffer);
 	buffer = rm_space(line_buffer);
 	free(line_buffer);
 	return (buffer);
