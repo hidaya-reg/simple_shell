@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/*
+/**
  * rm_space - remove leading space
  * @input: input
  * Return: strimed input
