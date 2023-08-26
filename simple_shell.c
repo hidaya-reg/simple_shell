@@ -33,7 +33,7 @@ int main(void)
 		{
 			free(input);
 			free(args);
-			exit(stat);
+			exit(0);
 		}
 		else if (_strcmp(args[0], "env") == 0)
 		{
