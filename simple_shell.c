@@ -18,16 +18,22 @@ int main(void)
 		input = _getline();
 		if (input[0] == '\0' || is_empty(input) == 1)
 		{
+			stat = 0;
 			continue;
 		}
 
 		args = tokenize(input);
 
+		if (!args || !args[0])
+		{
+			free(input);
+			continue;
+		}
 		if (_strcmp(args[0], "exit") == 0)
 		{
-			handle_exit(args);
 			free(input);
 			free(args);
+			exit(stat);
 		}
 		else if (_strcmp(args[0], "env") == 0)
 		{

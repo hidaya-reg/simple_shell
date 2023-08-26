@@ -21,6 +21,7 @@ int check_execute_cmd(char **args);
 char *build_cmd_path(char *str1, char *str2);
 int find_cmd_path(char **args);
 int execute_cmd(char **args);
+char *check_cmd(char **args);
 void handle_exit(char **args);
 
 void handle_env(char **args);

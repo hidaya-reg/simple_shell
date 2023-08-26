@@ -3,7 +3,7 @@
 /**
  * find_cmd_path - find the path of given cmd
  * @args: argument vector * @path: path variable
- * Return: 0 on succeess 1 in failure
+ * Return: cmd_path on succeess NULL in failure
  */
 
 int find_cmd_path(char **args)
@@ -27,7 +27,6 @@ int find_cmd_path(char **args)
 	}
 	free(path);
 	free(token);
-
 	/* cmd not found in PATH*/
 	return (1);
 }
